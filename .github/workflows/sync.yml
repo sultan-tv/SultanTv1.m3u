@@ -1,28 +1,29 @@
-name: Sync M3U
+name: Sync Playlist
 
 on:
-  schedule:
-    - cron: '0 */6 * * *'
-  workflow_dispatch:
+schedule:
+- cron: '0 */6 * * *'
+workflow_dispatch:
 
 permissions:
-  contents: write
+contents: write
 
 jobs:
-  sync:
-    runs-on: ubuntu-latest
+sync:
+runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
+steps:
+  - name: Checkout Repository
+    uses: actions/checkout@v4
 
-      - name: Download M3U
-        run: |
-          curl -L "https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Playlist/refs/heads/main/OTT_Navigator.m3u" -o my.m3u
+  - name: Download Latest Playlist
+    run: |
+      curl -L "https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Playlist/refs/heads/main/OTT_Navigator.m3u" -o One
 
-      - name: Commit Changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add my.m3u
-          git commit -m "Auto Sync M3U" || exit 0
-          git push
+  - name: Commit and Push Changes
+    run: |
+      git config user.name "github-actions"
+      git config user.email "github-actions@github.com"
+      git add One
+      git commit -m "Auto Update Playlist" || exit 0
+      git push
