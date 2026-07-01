@@ -18,7 +18,7 @@ jobs:
 
       - name: Download Latest M3U
         run: |
-          curl -L "https://m3uedit.online/get/dc813613e959d6352eca0a21e25c0e0b.m3u" -o One
+          curl -L "https://go.skym3u.top/qc98.m3u" -o One
 
       - name: Commit and Push Changes
         run: |
